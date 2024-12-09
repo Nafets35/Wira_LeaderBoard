@@ -1,0 +1,32 @@
+2024/12/10 04:09:55 [error] 10960#29044: *1 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2024/12/10 04:09:55 [error] 10960#29044: *2 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2024/12/10 04:16:11 [error] 10960#29044: *4 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /wpad.dat HTTP/1.1", host: "wpad.home"
+2024/12/10 04:22:43 [error] 10960#29044: *5 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /wpad.dat HTTP/1.1", host: "wpad.home"
+2024/12/10 04:22:45 [error] 10960#29044: *6 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /wpad.dat HTTP/1.1", host: "wpad.home"
+2024/12/10 04:23:00 [error] 10960#29044: *7 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /wpad.dat HTTP/1.1", host: "wpad.home"
+2024/12/10 04:24:00 [error] 10960#29044: *8 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /wpad.dat HTTP/1.1", host: "wpad.home"
+2024/12/10 04:34:00 [error] 10960#29044: *9 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /wpad.dat HTTP/1.1", host: "wpad.home"
+2024/12/10 04:34:19 [error] 10960#29044: *10 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2024/12/10 04:34:19 [error] 10960#29044: *11 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2024/12/10 04:36:04 [notice] 10536#20444: signal process started
+2024/12/10 04:36:11 [notice] 19132#18256: signal process started
+2024/12/10 04:36:11 [error] 19132#18256: CreateFile() "C:\nginx\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/12/10 04:37:17 [error] 11044#30216: *1 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2024/12/10 04:37:17 [error] 11044#30216: *2 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2024/12/10 04:40:04 [notice] 15488#15260: signal process started
+2024/12/10 04:40:23 [notice] 27132#17280: signal process started
+2024/12/10 04:40:23 [error] 27132#17280: CreateFile() "C:\nginx\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/12/10 04:47:48 [emerg] 17132#9604: unexpected end of file, expecting ";" or "}" in C:\nginx\nginx/conf/nginx.conf:49
+2024/12/10 04:58:54 [notice] 19360#14700: signal process started
+2024/12/10 04:58:59 [notice] 10616#19500: signal process started
+2024/12/10 04:58:59 [error] 10616#19500: CreateFile() "C:\nginx\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/12/10 05:04:21 [notice] 16572#16804: signal process started
+2024/12/10 05:08:33 [notice] 18388#20172: signal process started
+2024/12/10 05:09:36 [notice] 16728#15252: signal process started
+2024/12/10 05:09:52 [notice] 8560#19784: signal process started
+2024/12/10 05:09:52 [error] 8560#19784: CreateFile() "C:\nginx\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/12/10 05:12:31 [notice] 29280#1908: signal process started
+2024/12/10 05:16:29 [notice] 16668#4612: signal process started
+2024/12/10 05:16:36 [notice] 13516#18492: signal process started
+2024/12/10 05:16:36 [error] 13516#18492: CreateFile() "C:\nginx\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/12/10 05:37:23 [notice] 2292#4584: signal process started

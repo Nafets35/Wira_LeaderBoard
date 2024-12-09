@@ -10,7 +10,6 @@ import (
 	"github.com/rs/cors"
 )
 
-// LeaderboardEntry represents a player in the leaderboard
 type LeaderboardEntry struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
@@ -18,13 +17,10 @@ type LeaderboardEntry struct {
 	Score int    `json:"score"`
 }
 
-var db *sql.DB // Global database connection
+var db *sql.DB
 
 func main() {
-	// Connection string
 	connStr := "host=localhost port=5432 user=postgres password=123 dbname=leadership_board sslmode=disable"
-
-	// Connect to the database
 	var err error
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
@@ -32,7 +28,6 @@ func main() {
 	}
 	defer db.Close()
 
-	// Test the connection
 	err = db.Ping()
 	if err != nil {
 		log.Fatalf("Error pinging the database: %v", err)
@@ -41,20 +36,19 @@ func main() {
 
 	// Initialize CORS
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:5173"}, // Replace with your Vue.js app's URL
+		AllowedOrigins: []string{"http://localhost:5173"}, // This must match the Vue app URL
 		AllowedMethods: []string{"GET", "POST", "OPTIONS"},
+		AllowedHeaders: []string{"Content-Type", "Authorization"},
 	})
 
 	// Set up HTTP handlers
-	mux := http.NewServeMux()
-	mux.HandleFunc("/leaderboard", leaderboardHandler)
+	http.HandleFunc("/leaderboard", leaderboardHandler)
 
 	// Wrap the handlers with the CORS middleware
 	log.Println("Server is running on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", c.Handler(mux)))
+	log.Fatal(http.ListenAndServe(":8080", c.Handler(http.DefaultServeMux)))
 }
 
-// leaderboardHandler handles the /leaderboard endpoint
 func leaderboardHandler(w http.ResponseWriter, r *http.Request) {
 	leaderboard, err := fetchLeaderboard()
 	if err != nil {
@@ -67,7 +61,6 @@ func leaderboardHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(leaderboard)
 }
 
-// fetchLeaderboard retrieves leaderboard data from the database
 func fetchLeaderboard() ([]LeaderboardEntry, error) {
 	query := `
 		SELECT 
@@ -85,7 +78,7 @@ func fetchLeaderboard() ([]LeaderboardEntry, error) {
 			a.acc_id ,c.char_id, a.username, c.class_id, s.reward_score
 		ORDER BY 
 			score DESC;
-		`
+	`
 
 	rows, err := db.Query(query)
 	if err != nil {

@@ -16,10 +16,14 @@
       <button class="dropbtn" @click.stop="toggleClassDropdown">Class:</button>
       <div v-if="isClassDropdownOpen" class="dropdown-content">
         <a href="#" @click="filterByClass('All')">All</a>
-        <a href="#" @click="filterByClass('Archer')">Archer</a>
-        <a href="#" @click="filterByClass('Bard')">Bard</a>
-        <a href="#" @click="filterByClass('Cleric')">Cleric</a>
-        <a href="#" @click="filterByClass('Druid')">Druid</a>
+        <a href="#" @click="filterByClass('Human')">Human</a>
+        <a href="#" @click="filterByClass('Numah')">Numah</a>
+        <a href="#" @click="filterByClass('Bomoh')">Bomoh</a>
+        <a href="#" @click="filterByClass('Dukun')">Dukun</a>
+        <a href="#" @click="filterByClass('Hassasin')">Hassassin</a>
+        <a href="#" @click="filterByClass('Asurak')">Asurak</a>
+        <a href="#" @click="filterByClass('Bakunawan')">Bakunawan</a>
+        <a href="#" @click="filterByClass('Orang Kayangan')">Orang Kayangan</a>
         <!-- Show all classes -->
       </div>
     </div>
@@ -52,18 +56,14 @@
 </template>
 
 <script lang="ts">
+import "@/assets/styles/leaderboard.css";
 import { defineComponent } from 'vue'
+import type { Player } from '@/types/Player.ts'; // Adjust path if necessary
 
-interface Player {
-  id: number
-  name: string
-  class: string
-  score: number
-}
 export default defineComponent({
   data() {
     return {
-      players: [] as Player[], // Explicitly type the players array
+      players: [] as Player[],
       sortBy: 'score',
       sortOrder: 'desc',
       isSortDropdownOpen: false,
@@ -169,108 +169,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style>
-.search-container {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.search-bar {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 10px;
-}
-
-.pagination button {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.dropdown {
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown .dropdown-content {
-  display: block;
-}
-
-.leaderboard {
-  width: 100%;
-  text-align: center;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: auto;
-}
-
-th,
-td {
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-thead {
-  background-color: #f4f4f4;
-}
-
-.controls {
-  margin-top: 20px;
-}
-
-button {
-  padding: 10px 15px;
-  margin: 5px;
-  cursor: pointer;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-</style>
