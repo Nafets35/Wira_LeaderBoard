@@ -52,80 +52,30 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue'
+
+interface Player {
+  id: number
+  name: string
+  class: string
+  score: number
+}
+export default defineComponent({
   data() {
-    const names = [
-      'Alice',
-      'Bob',
-      'Charlie',
-      'Jamie',
-      'Mia',
-      'Liam',
-      'Noah',
-      'Olivia',
-      'Sophia',
-      'James',
-      'Emma',
-      'Ethan',
-      'Isabella',
-      'Mason',
-      'Ava',
-      'Logan',
-      'Lucas',
-      'Charlotte',
-      'Amelia',
-      'Henry',
-    ]
-    const classes = [
-      'Cleric',
-      'Archer',
-      'Druid',
-      'Bard',
-      'Warrior',
-      'Mage',
-      'Paladin',
-      'Rogue',
-      'Sorcerer',
-      'Monk',
-    ]
-
-    // Generate additional fake player entries
-    const generatePlayers = (count: number) => {
-      const players = []
-      for (let i = 1; i <= count; i++) {
-        players.push({
-          id: i + 7, // Start from the next ID
-          name: names[Math.floor(Math.random() * names.length)],
-          class: classes[Math.floor(Math.random() * classes.length)],
-          score: Math.floor(Math.random() * 1000) + 100, // Random score between 100 and 1100
-        })
-      }
-      return players
-    }
-
     return {
-      players: [
-        { id: 1, name: 'Alice', class: 'Cleric', score: 1200 },
-        { id: 2, name: 'Bob', class: 'Archer', score: 700 },
-        { id: 3, name: 'Charlie', class: 'Druid', score: 950 },
-        { id: 4, name: 'Jamie', class: 'Bard', score: 800 },
-        { id: 5, name: 'Derrick', class: 'Archer', score: 600 },
-        { id: 6, name: 'Eden', class: 'Druid', score: 1050 },
-        { id: 7, name: 'Fatin', class: 'Bard', score: 700 },
-        ...generatePlayers(50),
-      ],
+      players: [] as Player[], // Explicitly type the players array
       sortBy: 'score',
       sortOrder: 'desc',
       isSortDropdownOpen: false,
       isClassDropdownOpen: false,
       filteredClass: null as string | null,
-      currentPage: 1, // Tracks the current page
-      itemsPerPage: 10, // Number of players per page
-      searchQuery: '', // For search functionality
+      currentPage: 1,
+      itemsPerPage: 10,
+      searchQuery: '',
     }
   },
   computed: {
-    filteredPlayers() {
+    filteredPlayers(): Player[] {
       const query = this.searchQuery.trim().toLowerCase()
       let players = this.players
 
@@ -139,7 +89,7 @@ export default {
 
       return players
     },
-    sortedPlayers() {
+    sortedPlayers(): Player[] {
       return [...this.filteredPlayers].sort((a, b) => {
         if (this.sortBy === 'score') {
           return this.sortOrder === 'desc' ? b.score - a.score : a.score - b.score
@@ -151,23 +101,23 @@ export default {
         return 0
       })
     },
-    paginatedPlayers() {
+    paginatedPlayers(): Player[] {
       const start = (this.currentPage - 1) * this.itemsPerPage
       const end = start + this.itemsPerPage
       return this.sortedPlayers.slice(start, end)
     },
-    totalPages() {
+    totalPages(): number {
       return Math.ceil(this.sortedPlayers.length / this.itemsPerPage)
     },
   },
   methods: {
     toggleSortDropdown() {
       this.isSortDropdownOpen = !this.isSortDropdownOpen
-      this.isClassDropdownOpen = false // Close the other dropdown
+      this.isClassDropdownOpen = false
     },
     toggleClassDropdown() {
       this.isClassDropdownOpen = !this.isClassDropdownOpen
-      this.isSortDropdownOpen = false // Close the other dropdown
+      this.isSortDropdownOpen = false
     },
     sort(choice: string) {
       if (this.sortBy === choice) {
@@ -176,7 +126,6 @@ export default {
         this.sortBy = choice
         this.sortOrder = choice === 'name' ? 'asc' : 'desc'
       }
-      console.log(`Sorting by: ${choice}, Order: ${this.sortOrder}`)
       this.isSortDropdownOpen = false
     },
     filterByClass(className: string) {
@@ -202,8 +151,23 @@ export default {
         this.currentPage = page
       }
     },
+    async fetchPlayers() {
+      try {
+        const response = await fetch('http://localhost:8080/leaderboard')
+        if (!response.ok) {
+          throw new Error('Failed to fetch leaderboard data')
+        }
+        const data: Player[] = await response.json()
+        this.players = data
+      } catch (error) {
+        console.error('Error fetching leaderboard data:', error)
+      }
+    },
   },
-}
+  created() {
+    this.fetchPlayers()
+  },
+})
 </script>
 
 <style>
